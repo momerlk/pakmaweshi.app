@@ -14,7 +14,7 @@ export function Welcome() {
       <View style={styles.containerLogo}>
         <Animatable.Image
           source={require("../../assets/logo.png")}
-          style={{ width: "100%" }}
+          style={{ width: "90%" }}
           resizeMode="contain"
           animation="flipInY"
         />
@@ -25,14 +25,21 @@ export function Welcome() {
         style={styles.containerForm}
       >
         <Text style={styles.title}>
-          Monitore, organize seus gastos de qualquer lugar!
+          Welcome To Pak Maweshi
         </Text>
-        <Text style={styles.text}>Faça login para começar</Text>
+        <Text style={styles.text}>Sign In or Sign Up to Continue</Text>
+       
+        <TouchableOpacity style={styles.button2}
+        onPress={() => navigation.navigate("SignUp")}>
+          <Text style={styles.buttonText}
+          >Sign up</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("SignIn")}
         >
-          <Text style={styles.buttonText}>Acessar</Text>
+          <Text style={styles.buttonText}>Sign in</Text>
         </TouchableOpacity>
       </Animatable.View>
     </View>

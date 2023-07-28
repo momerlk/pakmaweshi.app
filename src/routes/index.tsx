@@ -5,7 +5,9 @@ import {
 
 import { Welcome } from "../pages/Welcome";
 import { SignIn } from "../pages/SignIn";
-import { Login } from "../pages/Login";
+import { SignUp } from "../pages/SignUp";
+import Home from "../pages/Home"
+import Post from "../pages/Post"
 
 const Stack = createNativeStackNavigator();
 type StackNavigation = {
@@ -28,10 +30,30 @@ export function Routes() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Login"
-        component={Login}
+        name="SignUp"
+        component={SignUp}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ 
+          headerShown: false,
+          headerBackVisible : false,
+          gestureEnabled: false,
+        }}
+        
+      />
+
+      <Stack.Screen
+        name="Post"
+        component={Post}
+        options={{ 
+          headerShown: true,
+        }}
+        
+      />
+
     </Stack.Navigator>
   );
 }
