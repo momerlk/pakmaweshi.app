@@ -29,9 +29,9 @@ const Tab = createBottomTabNavigator()
 
 const styles = SignInStyles;
 
-const VStack = props => <View style={{flex : 1, flexDirection : "column" , ...props.style}}>{props.children}</View>
+const VStack = (props : any) => <View style={{flex : 1, flexDirection : "column" , ...props.style}}>{props.children}</View>
 
-const HStack = props => <View style={{flex : 1, flexDirection : "row" , ...props.style}}>{props.children}</View>
+const HStack = (props : any) => <View style={{flex : 1, flexDirection : "row" , ...props.style}}>{props.children}</View>
 
 
 export default function () {
@@ -42,6 +42,8 @@ export default function () {
   const [location, setLocation] = useState<Location.LocationObject>();
   const [address, setAdd] = useState<Location.LocationGeocodedAddress>()
   const [errorMsg, setErrorMsg] = useState("");
+
+  const [description , setDescription] = useState("")
 
   useEffect(() => {
     (async () => {
@@ -129,9 +131,12 @@ export default function () {
             padding: 10,
         }} 
       multiline={true} 
-      numberOfLines={6}
-      maxLength={200}
+      numberOfLines={8}
+      maxLength={300}
+      value={description}
+      onChangeText={v => setDescription(v)}
       placeholder="Product Description"></TextInput>
+      <Text style={{paddingHorizontal : 12}}>{description.length}/{300}</Text>
 
       <HStack style={{paddingVertical : 20 , paddingHorizontal : 12}}>
         <Entypo name="location-pin" size={24} color="black" />
