@@ -12,7 +12,7 @@ export async function signIn(data : types.SignInBody) : Promise<{status : number
         body : raw,
         redirect : 'follow' 
     })
-    if (resp.status == 200) {
+    if (resp.status === 200) {
         let res = await resp.json()
         return {
             status : 200,
