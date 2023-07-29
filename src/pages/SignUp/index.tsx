@@ -82,7 +82,7 @@ export function SignUp() {
         <TextInput placeholder="Enter your full name" style={styles.input} />
 
         <Text style={styles.title}>Phone number</Text>
-        <HStack style={{paddingVertical : 20 , paddingHorizontal : 12}}>
+        <HStack style={{paddingVertical : 20}}>
         <Text style={{alignSelf : "flex-end" , fontSize : 18}}>+92 </Text>
         <TextInput placeholder="Phone number " style={{ fontSize : 18 , paddingHorizontal : 10}} inputMode="numeric"/>
         </HStack>
