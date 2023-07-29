@@ -1,4 +1,4 @@
-import React from "react";
+import React , {} from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +7,7 @@ import { WelcomeStyles } from "./styles";
 
 export function Welcome() {
   const navigation = useNavigation<StackTypes>();
+  navigation.replace("Home")
 
   const styles = WelcomeStyles;
   return (

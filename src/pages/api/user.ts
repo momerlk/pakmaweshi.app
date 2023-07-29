@@ -7,7 +7,7 @@ export async function signIn(data : types.SignInBody) : Promise<{status : number
     var raw = JSON.stringify(data);
 
     let resp = await fetch(types.url + "/signIn", {
-        method : "GET",
+        method : "POST",
         headers : myHeaders,
         body : raw,
         redirect : 'follow' 

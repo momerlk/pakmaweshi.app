@@ -1,4 +1,4 @@
-import React from "react";
+import React  , {useState} from "react";
 import {
   Text,
   View,
@@ -10,11 +10,18 @@ import * as Animatable from "react-native-animatable";
 import { SignInStyles } from "./styles";
 import { StackTypes } from "../../routes";
 import { useNavigation } from "@react-navigation/native";
+import api from "../api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const styles = SignInStyles;
 
 export function SignIn() {
   const navigation = useNavigation<StackTypes>();
+
+  const [log , setLog] = useState("")
+  const [password , setPassword] = useState("")
 
   return (
     <View style={styles.container}>
@@ -23,16 +30,32 @@ export function SignIn() {
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
         <Text style={styles.title}>Email</Text>
-        <TextInput placeholder="Enter your email or username" style={styles.input} />
+        <TextInput placeholder="Enter your email or username" style={styles.input} inputMode="email" 
+        value={log} onChangeText={v => setLog(v)}/>
         <Text style={styles.title}>Password</Text>
-        <TextInput placeholder="Enter your password" secureTextEntry={true} style={styles.input} />
+        <TextInput placeholder="Enter your password" secureTextEntry={true} style={styles.input} onChangeText={v => setPassword(v)}/>
 
         <TouchableOpacity style={styles.button}
-          onPress={() => {
-            navigation.replace("Home")
+          onPress={async () => {
+
+            let resp = await api.users.signIn({
+              username_email : log,
+              password : password
+            })
+            if (resp.status === 200){
+              try {
+                await AsyncStorage.setItem('token' , resp.token)
+                alert(`successfully signed in!`)
+              } catch (e){
+                alert(`failed to sign in local storage not working!`)
+              }
+              navigation.replace("Home")
+            } else {
+              alert(`failed to sign in with status code = ${resp.status}`)
+            }
           }} 
         >
-          <Text style={styles.buttonText}>Sign in</Text>
+          <Text style={styles.buttonText} >Sign in</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.buttonRegister}>

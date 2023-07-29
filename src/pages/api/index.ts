@@ -1,7 +1,7 @@
-import * as user from "./user"
+import * as users from "./user"
 import * as files from "./files"
 
 export default {
-    user : user,
+    users : users,
     files : files,
 }

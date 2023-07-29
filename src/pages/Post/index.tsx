@@ -119,6 +119,20 @@ export default function () {
       <Text style={{textAlign : "center" , fontSize : 20, fontWeight : "bold" , paddingVertical : 20}}>No Images</Text>}
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       <TextInput style={{...styles.input , fontSize : 16}} placeholder="Product name"></TextInput>
+      
+      <TextInput style={{
+            margin: 12,
+            minHeight : 100,
+            maxHeight : 200,
+            fontSize : 16,
+            borderWidth: 1,
+            padding: 10,
+        }} 
+      multiline={true} 
+      numberOfLines={6}
+      maxLength={200}
+      placeholder="Product Description"></TextInput>
+
       <HStack style={{paddingVertical : 20 , paddingHorizontal : 12}}>
         <Entypo name="location-pin" size={24} color="black" />
           <Text style={{ fontSize : 18 , paddingHorizontal : 10}}>

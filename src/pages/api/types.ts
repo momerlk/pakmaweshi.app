@@ -1,4 +1,4 @@
-export const url = "http://localhost:8080"
+export const url = "http://192.168.18.6:8080"
 
 export interface Account {
     username : string,

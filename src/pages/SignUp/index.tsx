@@ -20,12 +20,23 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 
+import api from "../api"
+
 const styles = SignInStyles;
 
 export function SignUp() {
   const navigation = useNavigation<StackTypes>();
   const [image, setImage] = useState<string>();
+  const [imageUrl , setImageUrl] = useState<string>();
   const [perm , setPerm] = useState(false);
+
+  // form fields
+  const [username , setUsername] = useState("")
+  const [email , setEmail] = useState("")
+  const [password , setPassword] = useState("")
+  const [number , setNumber] = useState("")
+  const [name , setName] = useState("")
+
 
   const getPermissionAsync = async () => {
     if (Constants.platform?.ios) {
@@ -56,7 +67,6 @@ export function SignUp() {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri)
-      
     }
   };
 
@@ -79,27 +89,51 @@ export function SignUp() {
 
 
         <Text style={styles.title}>Full Name</Text>
-        <TextInput placeholder="Enter your full name" style={styles.input} />
+        <TextInput placeholder="Enter your full name" style={styles.input} value={name} onChangeText={v => setName(v)}/>
 
         <Text style={styles.title}>Phone number</Text>
         <HStack style={{paddingVertical : 20}}>
         <Text style={{alignSelf : "flex-end" , fontSize : 18}}>+92 </Text>
-        <TextInput placeholder="Phone number " style={{ fontSize : 18 , paddingHorizontal : 10}} inputMode="numeric"/>
+        <TextInput placeholder="Phone number " style={{ fontSize : 18 , paddingHorizontal : 10}} inputMode="tel" 
+        value={number} onChangeText={v => setNumber(v.toString())}/>
         </HStack>
 
         <Text style={styles.title}>Username</Text>
-        <TextInput placeholder="Enter your user name" style={styles.input} />
+        <TextInput placeholder="Enter your user name" style={styles.input} value={username} onChangeText={v => setUsername(v)}/>
 
         <Text style={styles.title}>Email</Text>
-        <TextInput placeholder="Enter your email" style={styles.input} />
+        <TextInput placeholder="Enter your email" style={styles.input} 
+        value={email} onChangeText={v => setEmail(v)} inputMode="email"/>
 
 
         <Text style={styles.title}>Password</Text>
-        <TextInput placeholder="Enter your password" secureTextEntry={true} style={styles.input} />
+        <TextInput placeholder="Enter your password" inputMode="text" secureTextEntry={true} style={styles.input}  
+        onChangeText={v => setPassword(v)}/>
         <TextInput placeholder="Confirm password" secureTextEntry={true} style={styles.input} />
 
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={async () => {
+          let resp = await api.users.signUp({
+            email : email,
+            username : username,
+            name : name,
+            password : password,
+            avatar : image!,
+            number : "+92 " + number
+          })
+          if (resp != 200){
+            alert(`signing up failed with status code ${resp}`)
+          } else {
+            alert(`successfully created account!`)
+            setEmail("")
+            setImage("")
+            setPassword("")
+            setName("")
+            setUsername("")
+            setNumber("")
+            navigation.navigate("SignIn")
+          }
+        }}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
 

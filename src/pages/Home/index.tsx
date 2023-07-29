@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from "react";
+import React , {useState , useEffect , useCallback} from "react";
 import {
   Text,
   View,
@@ -14,6 +14,8 @@ import { SignInStyles } from "./styles";
 import { StackTypes } from "../../routes";
 import { useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 import { SliderBox } from "react-native-image-slider-box";
@@ -38,6 +40,7 @@ const styles = SignInStyles;
 
 interface PostData {
   name : string,
+  description : string,
   price : string,
   location : string,
   contact : string,
@@ -48,6 +51,7 @@ interface PostData {
 
 const data : PostData[] = [{
   name : "Pandas from Bangladesh",
+  description : "These are very beautiful pandas taken from the wild and are very good at taking care from you taken from Bangladesh but available at your service in Lahore , Punjab , Pakistan they look very beautiful and are sold at a very reasonable price",
   price : "20,000",
   location : "Lahore , Punjab , Pakistan",
   contact : "+92 3158972405",
@@ -61,6 +65,7 @@ const data : PostData[] = [{
 } , 
 {
   name : "Astro Caught Lackin twice",
+  description : "These are very beautiful pandas taken from the wild and are very good at taking care from you taken from Bangladesh but available at your service in Lahore , Punjab , Pakistan they look very beautiful and are sold at a very reasonable price",
   price : "69",
   location : "Lahore , Punjab , Pakistan",
   contact : "+92 3158972405",
@@ -75,6 +80,20 @@ const data : PostData[] = [{
 
 export function Post(props : PostData){
   const [liked , setLiked] = useState(false)
+
+
+  const [textShown, setTextShown] = useState(false); //To show ur remaining Text
+  const [lengthMore,setLengthMore] = useState(false); //to show the "Read more & Less Line"
+  const toggleNumberOfLines = () => { //To toggle the show text or hide it
+      setTextShown(!textShown);
+  }
+
+  const onTextLayout = useCallback(e =>{
+      setLengthMore(e.nativeEvent.lines.length >= 4); //to check the text is more than 4 lines or not
+      // console.log(e.nativeEvent);
+  },[lengthMore]);
+
+
   return (
     <View style={{
       flex : 1,
@@ -115,6 +134,18 @@ export function Post(props : PostData){
       </HStack>
       <Text style={{paddingHorizontal : 6 , fontSize : 17 , color : "gray"}}>{props.contact}</Text>
 
+      <Text
+              onTextLayout={onTextLayout}
+              numberOfLines={textShown ? undefined : 4}
+              style={{ lineHeight: 18 , paddingHorizontal : 12, paddingTop : 14 }}>{props.description}</Text>
+
+              {
+                  lengthMore ? <Text
+                  onPress={toggleNumberOfLines}
+                  style={{paddingHorizontal : 12, paddingTop : 9 , color: "gray" }}>{textShown ? 'Read less...' : 'Read more...'}</Text>
+                  :null
+              }
+
       <HStack style={{flex : 1 , paddingTop : 20 , paddingHorizontal : 6}}>
         <HStack style={{paddingHorizontal : 6 , flex : 1}}>
           <Text style={{alignSelf : "flex-end" , fontSize : 19 , fontWeight : "500" , color : "gray"}}>Rs </Text>
@@ -131,6 +162,21 @@ export function Posts() {
   const [s , setS] = React.useState("")
   const [clicked, setClicked] = useState(false);
 
+  // const getData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem('token');
+  //     if (value !== null) {
+  //       // value previously stored
+  //       alert(`token = ${value}`)
+  //     }
+  //   } catch (e) {
+  //     // error reading value
+  //   }
+  // };
+  // useEffect(() => {
+  //   getData()
+  // })
+
   return (
     <View style={styles.container} >
 
@@ -146,6 +192,7 @@ export function Posts() {
         {data.map(v => 
           <Post 
             name={v.name} 
+            description={v.description}
             price={v.price} 
             images={v.images} 
             contact={v.contact} 
@@ -160,7 +207,7 @@ export function Posts() {
   );
 }
 
-const PostButton = ({children , onPress}) => {
+const PostButton = (props : any) => {
     const navigation = useNavigation<StackTypes>();
 
   return (
@@ -182,7 +229,7 @@ const PostButton = ({children , onPress}) => {
           borderRadius : 35,
         }} 
       >
-        {children}
+        {props.children}
       </View>
     </TouchableOpacity>
   )
