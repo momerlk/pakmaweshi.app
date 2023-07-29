@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState , useEffect} from "react";
 import {
   Text,
   View,
@@ -15,16 +15,25 @@ import { StackTypes } from "../../routes";
 import { useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
+import {SearchBar} from "../util"
+
 const Tab = createBottomTabNavigator()
 
 const styles = SignInStyles;
 
+
+
+
 export default function () {
   const navigation = useNavigation<StackTypes>();
+  const [clicked , setClicked] = useState(false)
 
   return (
-    <View style={styles.container} >
-      <Text>CHAT</Text>
+    <View style={{...styles.container}} >
+      <SearchBar clicked={clicked} setClicked={setClicked} placeholder={"Search Messages"}/>
+      <ScrollView style={{...styles.container , backgroundColor : "white"}}>
+
+      </ScrollView>
     </View>
   );
 }

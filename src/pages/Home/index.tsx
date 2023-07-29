@@ -28,7 +28,7 @@ import {HStack , VStack} from "../components/util"
 import Chat from "../components/chat"
 import Dash from "../components/dashboard"
 import Settings from "../components/settings"
-import { SearchBar } from "./test";
+import { SearchBar } from "../components/util";
 
 const Tab = createBottomTabNavigator()
 
@@ -138,6 +138,7 @@ export function Posts() {
       <SearchBar 
         clicked={clicked}
         setClicked={setClicked}
+        placeholder={"Search"}
         />
 
         
@@ -226,6 +227,7 @@ export default function () {
       />
       <Tab.Screen name="chat" component={Chat}
         options={{
+          headerShown : false,
           tabBarIcon : ({focused}) => (
             <View>
               <Image source={require("../icons/chat.png")} 

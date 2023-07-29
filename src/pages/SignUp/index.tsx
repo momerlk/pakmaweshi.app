@@ -6,6 +6,7 @@ import {
   Button,
   TextInput,
   Image,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
 import { SliderBox } from "react-native-image-slider-box";
@@ -65,6 +66,7 @@ export function SignUp() {
         <Text style={styles.message}>Create an account!</Text>
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={{...styles.containerForm , flex : 1}}>
+        <ScrollView>
 
         <Text style={{textAlign : "center" , fontSize : 20, fontWeight : "bold" , paddingVertical : 20}}>Profile Picture</Text>
         {image ? 
@@ -77,7 +79,7 @@ export function SignUp() {
 
 
         <Text style={styles.title}>Full Name</Text>
-        <TextInput placeholder="Enter your full name" secureTextEntry={true} style={styles.input} />
+        <TextInput placeholder="Enter your full name" style={styles.input} />
 
         <Text style={styles.title}>Phone number</Text>
         <HStack style={{paddingVertical : 20 , paddingHorizontal : 12}}>
@@ -86,6 +88,7 @@ export function SignUp() {
         </HStack>
 
         <Text style={styles.title}>Username</Text>
+        <TextInput placeholder="Enter your user name" style={styles.input} />
 
         <Text style={styles.title}>Email</Text>
         <TextInput placeholder="Enter your email" style={styles.input} />
@@ -110,7 +113,9 @@ export function SignUp() {
           </Text>
         </TouchableOpacity>
 
-        
+        <View style={{paddingVertical : 100}}></View>
+
+        </ScrollView>
       </Animatable.View>
     </View>
   );
