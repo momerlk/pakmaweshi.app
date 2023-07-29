@@ -23,7 +23,7 @@ export function SignIn() {
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
         <Text style={styles.title}>Email</Text>
-        <TextInput placeholder="Enter your email" style={styles.input} />
+        <TextInput placeholder="Enter your email or username" style={styles.input} />
         <Text style={styles.title}>Password</Text>
         <TextInput placeholder="Enter your password" secureTextEntry={true} style={styles.input} />
 

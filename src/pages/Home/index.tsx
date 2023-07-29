@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState , useEffect} from "react";
 import {
   Text,
   View,
@@ -15,14 +15,20 @@ import { StackTypes } from "../../routes";
 import { useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 
+
 import { SliderBox } from "react-native-image-slider-box";
 import { Entypo } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
+
+
 import {HStack , VStack} from "../components/util"
+
 
 
 import Chat from "../components/chat"
 import Dash from "../components/dashboard"
 import Settings from "../components/settings"
+import { SearchBar } from "./test";
 
 const Tab = createBottomTabNavigator()
 
@@ -41,8 +47,8 @@ interface PostData {
 }
 
 const data : PostData[] = [{
-  name : "Astro Caught Lackin",
-  price : "324",
+  name : "Pandas from Bangladesh",
+  price : "20,000",
   location : "Lahore , Punjab , Pakistan",
   contact : "+92 3158972405",
   images : [
@@ -51,7 +57,7 @@ const data : PostData[] = [{
     "https://img.i-scmp.com/cdn-cgi/image/fit=contain,width=1098,format=auto/sites/default/files/styles/1200x800/public/d8/images/canvas/2022/01/26/795b5720-0a91-45cd-8f0c-ccfe494b1836_9d1e5b38.jpg?itok=P8vmWmJh&v=1643159618",
   ],
   avatar : "https://wallpapercave.com/wp/wp5609975.jpg",
-  username : "momer",
+  username : "africanboy",
 } , 
 {
   name : "Astro Caught Lackin twice",
@@ -68,15 +74,16 @@ const data : PostData[] = [{
 }]
 
 export function Post(props : PostData){
+  const [liked , setLiked] = useState(false)
   return (
     <View style={{
       flex : 1,
-      borderBottomWidth : 1,
-      borderTopWidth : 1,
+      borderBottomWidth : 0.5,
+      borderTopWidth : 0.5,
       width : "100%",
       borderColor : "#D3D3D3",
       paddingVertical : 12,
-      marginVertical : 20,
+      marginVertical : 4,
     }}>
       <HStack style={{paddingBottom : 12 , paddingLeft : 6}}>
         <Image source={{uri : props.avatar}} style={{height : 30 , width : 30 , borderRadius : 50}}/>
@@ -85,21 +92,33 @@ export function Post(props : PostData){
           </Text>
       </HStack>
 
-      <SliderBox images={props.images} sliderBoxHeight={250}/>
+      <SliderBox images={props.images} sliderBoxHeight={250} 
+      onCurrentImagePressed={() => liked ? setLiked(false) : setLiked(true)}/>
       
-      <Text style={{fontWeight : 'bold' , fontSize : 26 , paddingHorizontal : 6 , paddingTop : 15}}>{props.name}</Text>
+
+      <HStack style={{paddingTop : 15}}>
+        <Text style={{fontWeight : 'bold' , fontSize : 26 , paddingHorizontal : 6 , marginRight : 100}}>{props.name}</Text>
+        <TouchableOpacity style={{marginTop : 16 , position : "absolute" , right : 10}} 
+        onPress={() => liked ? setLiked(false) : setLiked(true)}>
+          { liked 
+            ? <AntDesign name="heart" size={32} color="red" />
+            : <AntDesign name="hearto" size={32} color="black"/>
+          }
+        </TouchableOpacity>
+      </HStack>
+
       <HStack style={{paddingTop : 12 , paddingBottom : 1}}>
         <Entypo name="location-pin" size={24} color="red" />
-          <Text style={{ fontSize : 16 , paddingHorizontal : 2}}>
+          <Text style={{ fontSize : 16 , paddingHorizontal : 2 , color : "gray"}}>
             {props.location}
           </Text>
       </HStack>
-      <Text style={{paddingHorizontal : 6 , fontSize : 17}}>{props.contact}</Text>
+      <Text style={{paddingHorizontal : 6 , fontSize : 17 , color : "gray"}}>{props.contact}</Text>
 
       <HStack style={{flex : 1 , paddingTop : 20 , paddingHorizontal : 6}}>
         <HStack style={{paddingHorizontal : 6 , flex : 1}}>
-          <Text style={{alignSelf : "flex-end" , fontSize : 22 , fontWeight : "500" , color : "gray"}}>Rs </Text>
-          <Text style={{alignSelf : "flex-end" , fontSize : 22 , paddingHorizontal : 2 , fontWeight : "400"}}>{props.price}</Text>
+          <Text style={{alignSelf : "flex-end" , fontSize : 19 , fontWeight : "500" , color : "gray"}}>Rs </Text>
+          <Text style={{alignSelf : "flex-end" , fontSize : 19 , paddingHorizontal : 2 , fontWeight : "400"}}>{props.price}</Text>
         </HStack>
         <Button title="Contact"/>
       </HStack>
@@ -110,20 +129,29 @@ export function Post(props : PostData){
 export function Posts() {
   const navigation = useNavigation<StackTypes>();
   const [s , setS] = React.useState("")
+  const [clicked, setClicked] = useState(false);
 
   return (
     <View style={styles.container} >
+
+
+      <SearchBar 
+        clicked={clicked}
+        setClicked={setClicked}
+        />
+
+        
       <ScrollView style={{height : "100%" , backgroundColor : "white"}}>
         {data.map(v => 
-        <Post 
-        name={v.name} 
-        price={v.price} 
-        images={v.images} 
-        contact={v.contact} 
-        location={v.location}
-        avatar={v.avatar}
-        username={v.username}
-        />
+          <Post 
+            name={v.name} 
+            price={v.price} 
+            images={v.images} 
+            contact={v.contact} 
+            location={v.location}
+            avatar={v.avatar}
+            username={v.username}
+          />
         )}
         <View style={{paddingVertical : 100}}></View>
       </ScrollView>
@@ -180,6 +208,7 @@ export default function () {
     >
       <Tab.Screen name="home" component={Posts} 
         options={{
+          headerShown : false,
           tabBarIcon : ({focused}) => (
             <View>
               <Image source={require("../icons/home.png")} 

@@ -77,6 +77,8 @@ export default function () {
       const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
+      } else {
+        setPerm(true)
       }
       return true
     }
@@ -91,10 +93,11 @@ export default function () {
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsMultipleSelection : true,
+      selectionLimit : 10,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0,
     });
 
     if (!result.canceled) {
