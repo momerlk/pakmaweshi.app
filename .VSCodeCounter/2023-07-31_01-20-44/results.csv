@@ -1,0 +1,33 @@
+"filename", "language", "JSON with Comments", "JSON", "TypeScript", "TypeScript JSX", "JavaScript", "Markdown", "comment", "blank", "total"
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\App.tsx", "TypeScript JSX", 0, 0, 0, 11, 0, 0, 0, 2, 13
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\README.md", "Markdown", 0, 0, 0, 0, 0, 18, 0, 9, 27
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\app.json", "JSON", 0, 15, 0, 0, 0, 0, 24, 0, 39
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\babel.config.js", "JavaScript", 0, 0, 0, 0, 6, 0, 0, 1, 7
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package-lock.json", "JSON", 0, 36794, 0, 0, 0, 0, 0, 1, 36795
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package.json", "JSON", 0, 51, 0, 0, 0, 0, 0, 1, 52
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Home\index.tsx", "TypeScript JSX", 0, 0, 0, 314, 0, 0, 2, 41, 357
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Home\styles.ts", "TypeScript", 0, 0, 55, 0, 0, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Post\index.tsx", "TypeScript JSX", 0, 0, 0, 163, 0, 0, 1, 30, 194
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Post\styles.ts", "TypeScript", 0, 0, 13, 0, 0, 0, 0, 2, 15
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignIn\index.tsx", "TypeScript JSX", 0, 0, 0, 65, 0, 0, 0, 10, 75
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignIn\styles.ts", "TypeScript", 0, 0, 56, 0, 0, 0, 0, 2, 58
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignUp\index.tsx", "TypeScript JSX", 0, 0, 0, 127, 0, 0, 2, 28, 157
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignUp\styles.ts", "TypeScript", 0, 0, 56, 0, 0, 0, 0, 2, 58
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Welcome\index.tsx", "TypeScript JSX", 0, 0, 0, 45, 0, 0, 0, 7, 52
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Welcome\styles.ts", "TypeScript", 0, 0, 57, 0, 0, 0, 0, 1, 58
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\files.ts", "TypeScript", 0, 0, 45, 0, 0, 0, 0, 11, 56
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\index.ts", "TypeScript", 0, 0, 6, 0, 0, 0, 0, 1, 7
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\posts.ts", "TypeScript", 0, 0, 13, 0, 0, 0, 0, 3, 16
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\types.ts", "TypeScript", 0, 0, 22, 0, 0, 0, 0, 3, 25
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\user.ts", "TypeScript", 0, 0, 35, 0, 0, 0, 0, 9, 44
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\chat\index.tsx", "TypeScript JSX", 0, 0, 0, 30, 0, 0, 0, 11, 41
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\chat\styles.ts", "TypeScript", 0, 0, 55, 0, 0, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\dashboard\index.tsx", "TypeScript JSX", 0, 0, 0, 26, 0, 0, 0, 6, 32
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\dashboard\styles.ts", "TypeScript", 0, 0, 55, 0, 0, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\settings\index.tsx", "TypeScript JSX", 0, 0, 0, 26, 0, 0, 0, 6, 32
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\settings\styles.ts", "TypeScript", 0, 0, 55, 0, 0, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\util.tsx", "TypeScript JSX", 0, 0, 0, 80, 0, 0, 0, 10, 90
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\routes\index.tsx", "TypeScript JSX", 0, 0, 0, 53, 0, 0, 0, 7, 60
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\utils\phoneNumberMask.ts", "TypeScript", 0, 0, 7, 0, 0, 0, 0, 1, 8
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\tsconfig.json", "JSON with Comments", 6, 0, 0, 0, 0, 0, 0, 1, 7
+"Total", "-", 6, 36860, 530, 940, 6, 18, 29, 214, 38603

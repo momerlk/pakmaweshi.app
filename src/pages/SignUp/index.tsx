@@ -31,6 +31,7 @@ export function SignUp() {
   const [perm , setPerm] = useState(false);
 
   // form fields
+  const [avatar , setAvatar] = useState("")
   const [username , setUsername] = useState("")
   const [email , setEmail] = useState("")
   const [password , setPassword] = useState("")
@@ -67,6 +68,25 @@ export function SignUp() {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri)
+
+      let toUpload = []
+      toUpload.push(result.assets[0].uri)
+
+
+      let resp = await api.files.UploadFile("token" , toUpload)
+      if (resp.status === 200){
+
+        const id = resp.ids[0]
+        let uri = api.files.FileidToUrl(id)
+
+        console.log(`uri = ${uri}`)
+        
+        setAvatar(uri)
+
+      } else {
+        alert(`failed to upload file with status code = ${resp.status}`)
+      }
+
     }
   };
 
@@ -118,7 +138,7 @@ export function SignUp() {
             username : username,
             name : name,
             password : password,
-            avatar : image!,
+            avatar : avatar,
             number : "+92 " + number
           })
           if (resp != 200){

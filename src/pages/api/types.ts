@@ -15,9 +15,13 @@ export interface SignInBody {
 }
 
 export interface Post {
+  id : string,
+  user_id : string,
   name : string,
+  description : string,
   price : string,
   location : string,
+  username : string,
   contact : string,
   images : string[],
   avatar : string,

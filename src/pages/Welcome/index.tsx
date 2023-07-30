@@ -1,13 +1,16 @@
-import React , {} from "react";
+import React , {useState , useEffect} from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { useNavigation } from "@react-navigation/native";
 import { StackTypes } from "../../routes";
 import { WelcomeStyles } from "./styles";
 
+import api from "../api"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 export function Welcome() {
   const navigation = useNavigation<StackTypes>();
-  navigation.replace("Home")
 
   const styles = WelcomeStyles;
   return (

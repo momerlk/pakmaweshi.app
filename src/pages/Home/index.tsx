@@ -7,6 +7,7 @@ import {
   Button,
   TouchableOpacity,
   Image,
+  RefreshControl,
   ScrollView,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
@@ -15,6 +16,7 @@ import { StackTypes } from "../../routes";
 import { useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from "../api"
 
 
 
@@ -88,7 +90,7 @@ export function Post(props : PostData){
       setTextShown(!textShown);
   }
 
-  const onTextLayout = useCallback(e =>{
+  const onTextLayout = useCallback((e : any) =>{
       setLengthMore(e.nativeEvent.lines.length >= 4); //to check the text is more than 4 lines or not
       // console.log(e.nativeEvent);
   },[lengthMore]);
@@ -161,21 +163,47 @@ export function Posts() {
   const navigation = useNavigation<StackTypes>();
   const [s , setS] = React.useState("")
   const [clicked, setClicked] = useState(false);
+  const [posts , setPosts] = useState(data) 
 
-  // const getData = async () => {
-  //   try {
-  //     const value = await AsyncStorage.getItem('token');
-  //     if (value !== null) {
-  //       // value previously stored
-  //       alert(`token = ${value}`)
-  //     }
-  //   } catch (e) {
-  //     // error reading value
-  //   }
-  // };
-  // useEffect(() => {
-  //   getData()
-  // })
+  const [render , setRender] = useState(0)
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    AsyncStorage.getItem("token").then(async token => {
+        if (token !== null){
+          let resp = await api.posts.GetFeed(token)
+          if (resp.status !== 200){
+            alert(`failed to get feed with status code = ${resp.status}`)
+          } else {
+            setRefreshing(false)
+            setPosts(resp.posts.reverse())
+            
+          }
+        }  
+      })
+  }, []);
+
+
+
+  useEffect(() => {
+    if (render === 0){
+      setRender(1)
+      AsyncStorage.getItem("token").then(async token => {
+        if (token !== null){
+          let resp = await api.posts.GetFeed(token)
+          if (resp.status !== 200){
+            alert(`failed to get feed with status code = ${resp.status}`)
+          } else {
+            setPosts(resp.posts.reverse())
+          }
+        }  
+      })
+    }
+  } , [render])
 
   return (
     <View style={styles.container} >
@@ -188,8 +216,12 @@ export function Posts() {
         />
 
         
-      <ScrollView style={{height : "100%" , backgroundColor : "white"}}>
-        {data.map(v => 
+      <ScrollView style={{height : "100%" , backgroundColor : "white"}}
+        refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+        {posts.map(v => 
           <Post 
             name={v.name} 
             description={v.description}
