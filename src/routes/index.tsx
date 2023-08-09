@@ -8,6 +8,7 @@ import { SignIn } from "../pages/SignIn";
 import { SignUp } from "../pages/SignUp";
 import Home from "../pages/Home"
 import Post from "../pages/Post"
+import { ChatScreen } from "../pages/components/chat";
 
 const Stack = createNativeStackNavigator();
 type StackNavigation = {
@@ -50,6 +51,15 @@ export function Routes() {
         component={Post}
         options={{ 
           headerShown: true,
+        }}
+        
+      />
+
+      <Stack.Screen
+        name="Message"
+        component={ChatScreen}
+        options={{ 
+          headerShown: false,
         }}
         
       />

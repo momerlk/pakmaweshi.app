@@ -1,4 +1,4 @@
-export const url = "http://192.168.18.6:8080"
+export const url = "http://localhost:8080"
 
 export interface Account {
     username : string,
@@ -25,4 +25,16 @@ export interface Post {
   contact : string,
   images : string[],
   avatar : string,
+}
+
+export interface Message {
+  content : string;
+  sent : boolean;
+  time_sent : string;
+}
+export interface ChatData {
+  name : string;
+  username : string;
+  avatar : string;
+  messages : Message[];
 }

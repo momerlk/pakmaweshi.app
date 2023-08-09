@@ -1,0 +1,34 @@
+"filename", "language", "JSON", "JSON with Comments", "JavaScript", "TypeScript JSX", "TypeScript", "Markdown", "comment", "blank", "total"
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\App.tsx", "TypeScript JSX", 0, 0, 0, 11, 0, 0, 0, 2, 13
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\README.md", "Markdown", 0, 0, 0, 0, 0, 15, 0, 9, 24
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\app.json", "JSON", 15, 0, 0, 0, 0, 0, 24, 0, 39
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\babel.config.js", "JavaScript", 0, 0, 6, 0, 0, 0, 0, 1, 7
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package-lock.json", "JSON", 37230, 0, 0, 0, 0, 0, 0, 1, 37231
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package.json", "JSON", 53, 0, 0, 0, 0, 0, 0, 1, 54
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Home\index.tsx", "TypeScript JSX", 0, 0, 0, 350, 0, 0, 2, 47, 399
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Home\styles.ts", "TypeScript", 0, 0, 0, 0, 55, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Post\index.tsx", "TypeScript JSX", 0, 0, 0, 201, 0, 0, 2, 41, 244
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Post\styles.ts", "TypeScript", 0, 0, 0, 0, 13, 0, 0, 2, 15
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignIn\index.tsx", "TypeScript JSX", 0, 0, 0, 65, 0, 0, 0, 10, 75
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignIn\styles.ts", "TypeScript", 0, 0, 0, 0, 56, 0, 0, 2, 58
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignUp\index.tsx", "TypeScript JSX", 0, 0, 0, 139, 0, 0, 2, 36, 177
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignUp\styles.ts", "TypeScript", 0, 0, 0, 0, 56, 0, 0, 2, 58
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Welcome\index.tsx", "TypeScript JSX", 0, 0, 0, 45, 0, 0, 0, 7, 52
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Welcome\styles.ts", "TypeScript", 0, 0, 0, 0, 57, 0, 0, 1, 58
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\chats.ts", "TypeScript", 0, 0, 0, 0, 21, 0, 0, 2, 23
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\files.ts", "TypeScript", 0, 0, 0, 0, 46, 0, 0, 14, 60
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\index.ts", "TypeScript", 0, 0, 0, 0, 23, 0, 0, 2, 25
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\posts.ts", "TypeScript", 0, 0, 0, 0, 36, 0, 0, 4, 40
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\types.ts", "TypeScript", 0, 0, 0, 0, 36, 0, 0, 5, 41
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\user.ts", "TypeScript", 0, 0, 0, 0, 35, 0, 0, 9, 44
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\chat\index.tsx", "TypeScript JSX", 0, 0, 0, 157, 0, 0, 0, 20, 177
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\chat\styles.ts", "TypeScript", 0, 0, 0, 0, 55, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\dashboard\index.tsx", "TypeScript JSX", 0, 0, 0, 26, 0, 0, 0, 6, 32
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\dashboard\styles.ts", "TypeScript", 0, 0, 0, 0, 55, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\settings\index.tsx", "TypeScript JSX", 0, 0, 0, 26, 0, 0, 0, 6, 32
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\settings\styles.ts", "TypeScript", 0, 0, 0, 0, 55, 0, 0, 2, 57
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\util.tsx", "TypeScript JSX", 0, 0, 0, 80, 0, 0, 0, 10, 90
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\routes\index.tsx", "TypeScript JSX", 0, 0, 0, 61, 0, 0, 0, 9, 70
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\utils\phoneNumberMask.ts", "TypeScript", 0, 0, 0, 0, 7, 0, 0, 1, 8
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\tsconfig.json", "JSON with Comments", 0, 6, 0, 0, 0, 0, 0, 1, 7
+"Total", "-", 37298, 6, 6, 1161, 606, 15, 30, 259, 39381

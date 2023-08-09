@@ -207,7 +207,7 @@ export default function () {
                 price : price,
                 description : description,
                 location : fmtLocation,
-                contact : number,
+                contact : "+92 " + number,
                 images : newImages,
                 avatar : images[0],
                 username : "",
