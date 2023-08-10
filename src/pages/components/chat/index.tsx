@@ -61,16 +61,42 @@ const msgsToImsgs = (msgs : Message[]) : IMessage[] => {
 
 export function ChatScreen({route , navigation} : any){
   const [messages, setMessages] = useState<IMessage[]>([]);
+  const [renders , setRenders] = useState(0)
   
   const chat: ChatData = route.params.chat
 
+  let ws : null | WebSocket = null
 
-   
+
+  
+
   useEffect(() => {
     setMessages(msgsToImsgs(chat.messages))
+    if (renders === 0 || ws === null){
+      api.getToken().then(token => {
+        ws = new WebSocket("ws://192.168.18.6:8080/direct" , undefined , {headers : {
+          Authorization : token,
+        }})
+
+        ws.onopen = (e : any) => alert(`connected to websocket!`)
+
+        ws.onmessage = (e : any) => console.log(e)
+        ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
+      })
+      setRenders(1)
+    }
   }, [])
    
   const onSend = useCallback((messages : IMessage[]) => {
+    messages.forEach(v => {
+      if(ws !== null){
+        ws.send(JSON.stringify({
+          "receiver" : chat.username,
+          "content" : v.text,
+          "attachment" : "",
+        }))
+      }
+    })
     setMessages((previousMessages : any) => GiftedChat.append(previousMessages, messages))
   }, [])
 
