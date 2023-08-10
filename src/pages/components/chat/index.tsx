@@ -76,9 +76,7 @@ export function ChatScreen({route , navigation} : any){
 
   return (
     <View style={{backgroundColor : "white" , width : "100%" , height: "100%" , paddingBottom : 30}}>
-      <View style={{paddingBottom : 100 , borderBottomColor : "gray" , borderBottomWidth : 3}}>
-        <Text>Header</Text>
-      </View>
+     
     <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
@@ -87,7 +85,7 @@ export function ChatScreen({route , navigation} : any){
         }}
         
       />
-      <View style={{borderBottomColor : "lightGray", borderBottomWidth: 2}}></View>
+      <View style={{borderBottomColor : "lightGray", borderBottomWidth: 0.5}}></View>
       </View>
   )
 }

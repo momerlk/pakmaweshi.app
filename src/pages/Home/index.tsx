@@ -157,7 +157,7 @@ export function Post(props : PostData){
         <Button onPress={() => {
           navigation.navigate("Message" , {
             chat : {
-              name : props.name,
+              name : "",
               username : props.username,
               avatar : props.avatar,
               messages : [],
