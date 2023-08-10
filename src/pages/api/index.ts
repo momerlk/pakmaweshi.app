@@ -19,7 +19,7 @@ export default {
     },
     types : types,
     users : users,
-    files : files,
+    files : files, 
     posts : posts,
     chats : chats,
 }

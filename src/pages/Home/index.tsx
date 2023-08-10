@@ -82,6 +82,7 @@ const data : PostData[] = [{
 
 export function Post(props : PostData){
   const [liked , setLiked] = useState(false)
+  const navigation = useNavigation<StackTypes>()
 
 
   const [textShown, setTextShown] = useState(false); //To show ur remaining Text
@@ -153,7 +154,16 @@ export function Post(props : PostData){
           <Text style={{alignSelf : "flex-end" , fontSize : 19 , fontWeight : "500" , color : "gray"}}>Rs </Text>
           <Text style={{alignSelf : "flex-end" , fontSize : 19 , paddingHorizontal : 2 , fontWeight : "400"}}>{props.price}</Text>
         </HStack>
-        <Button title="Contact"/>
+        <Button onPress={() => {
+          navigation.navigate("Message" , {
+            chat : {
+              name : props.name,
+              username : props.username,
+              avatar : props.avatar,
+              messages : [],
+            }
+          }) 
+        }} title="Contact"/>
       </HStack>
     </View>
   )

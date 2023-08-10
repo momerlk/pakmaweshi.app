@@ -36,23 +36,38 @@ export interface ChatData {
   messages : Message[];
 }
 
-export function ChatScreen(){
+const msgToImsg = (msg : Message) : IMessage => {return {
+  _id : Math.random(),
+  text : msg.content,
+  createdAt : new Date(),
+  user : msg.sent ? {
+    _id : 1,
+    name : "React",
+    avatar : "https://neural.love/cdn/ai-photostock/1ed9b768-7341-6682-b3be-47a7bb8aa7aa/0.jpg?Expires=1693526399&Signature=LZRtaKIz8Li-1hNYLclU5eaBBE-1AJm08vGdFv4umku7-q3ILujYZRa-8Gyb38S99QeqMBh~TObpD0~LjbJqx4InCxi05~NHA7i3PRHI7Z57JPs6llkzRCQvgyf-SHgp6I4nJuH66EWavU8EQ8dVkzN6ao7b9LMneYS3Q5S3xLMc7S2kectSgsQ5KZmpeLDE17o7rUvwcn1WwvXh4UBLRk44zYX~ofZupPyfDl1Ny13qDeJmQQNpjkIBkE4YfUfiBYypVxCmYMkEd8ykwQCnHsmotARAq7Wy6qfeTbEAsvhpLxwex1zIDvY4QewZIJE7pip6d8Kc4RFWdSdl0o6YVA__&Key-Pair-Id=K2RFTOXRBNSROX",
+  } : {
+    _id : 2,
+    name : "React",
+    avatar : "https://neural.love/cdn/ai-photostock/1ed9b768-7341-6682-b3be-47a7bb8aa7aa/0.jpg?Expires=1693526399&Signature=LZRtaKIz8Li-1hNYLclU5eaBBE-1AJm08vGdFv4umku7-q3ILujYZRa-8Gyb38S99QeqMBh~TObpD0~LjbJqx4InCxi05~NHA7i3PRHI7Z57JPs6llkzRCQvgyf-SHgp6I4nJuH66EWavU8EQ8dVkzN6ao7b9LMneYS3Q5S3xLMc7S2kectSgsQ5KZmpeLDE17o7rUvwcn1WwvXh4UBLRk44zYX~ofZupPyfDl1Ny13qDeJmQQNpjkIBkE4YfUfiBYypVxCmYMkEd8ykwQCnHsmotARAq7Wy6qfeTbEAsvhpLxwex1zIDvY4QewZIJE7pip6d8Kc4RFWdSdl0o6YVA__&Key-Pair-Id=K2RFTOXRBNSROX",
+  },
+}}
+
+const msgsToImsgs = (msgs : Message[]) : IMessage[] => {
+  const imsgs : IMessage[] = []
+  msgs.map(v => 
+    imsgs.push(msgToImsg(v))
+  )
+  return imsgs
+}
+
+export function ChatScreen({route , navigation} : any){
   const [messages, setMessages] = useState<IMessage[]>([]);
   
+  const chat: ChatData = route.params.chat
+
+
    
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ])
+    setMessages(msgsToImsgs(chat.messages))
   }, [])
    
   const onSend = useCallback((messages : IMessage[]) => {
@@ -61,6 +76,9 @@ export function ChatScreen(){
 
   return (
     <View style={{backgroundColor : "white" , width : "100%" , height: "100%" , paddingBottom : 30}}>
+      <View style={{paddingBottom : 100 , borderBottomColor : "gray" , borderBottomWidth : 3}}>
+        <Text>Header</Text>
+      </View>
     <GiftedChat
         messages={messages}
         onSend={messages => onSend(messages)}
@@ -74,7 +92,7 @@ export function ChatScreen(){
   )
 }
 
-const data : ChatData[] = [
+const mock : ChatData[] = [
   {
     "name" : "Omer Ali Malik",
     "username" : "momer",
@@ -130,7 +148,9 @@ export function ChatItem(props : ChatData){
 
   return (
     <View style={{paddingTop : 7}}>
-      <TouchableOpacity onPress={() => navigation.navigate("Message")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Message" , {
+        chat : props,
+      })}>
         <HStack style={{paddingBottom : 12 , paddingLeft : 6}}>
         <Image source={{uri : props.avatar}} style={{height : 65 , width : 65 , borderRadius : 50}}/>
           <VStack style={{paddingHorizontal : 10 , paddingTop : 16}}>
@@ -139,7 +159,7 @@ export function ChatItem(props : ChatData){
             </Text>
             <Text style={{color : "gray"}}>{props.messages[props.messages.length-1].content}</Text>
           </VStack>
-          <Text style={{paddingTop: 16 , paddingRight : 10 , color : "gray"}}>{props.messages[props.messages.length-1].time}</Text>
+          <Text style={{paddingTop: 16 , paddingRight : 10 , color : "gray"}}>{props.messages[props.messages.length-1].time_sent}</Text>
       </HStack>
       </TouchableOpacity>
     </View>
@@ -151,24 +171,34 @@ export interface ChatListProps {
   chats : ChatData[]
 }
 export default function () {
-  let props = data
+  const [data , setData] = useState(mock)
   const navigation = useNavigation<StackTypes>();
   const [clicked , setClicked] = useState(false)
+  const [renders  , setRenders] = useState(0)
 
   useEffect(() => {
+    if(renders === 0){
     api.getToken().then(token => {
-      api.chats.GetChats(token).then(data => {
-        props = data.chats
-        alert(`loaded chats!`)
+      console.log(`token = ${token}`)
+      api.chats.GetChats(token).then(res => {
+        if (res.status !== 200){
+          alert(`failed to load chats , refresh to retry`)
+        } else {
+          console.log(res.chats)
+          setData(res.chats)
+        }
+        
+        setRenders(1)
       })
     })
+  }
   })
 
   return (
     <View style={{...styles.container}} >
       <SearchBar clicked={clicked} setClicked={setClicked} placeholder={"Search Messages"}/>
       <ScrollView style={{...styles.container , backgroundColor : "white"}}>
-        {props.map(v => <ChatItem {...v}></ChatItem>)}
+        {data.map(v => <ChatItem {...v}></ChatItem>)}
       </ScrollView>
     </View>
   );

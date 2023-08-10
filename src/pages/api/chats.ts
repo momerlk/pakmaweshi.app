@@ -2,7 +2,7 @@ import * as types from "./types"
 
 
 export async function GetChats(token : string) : Promise<{status : number , chats : types.ChatData[]}>{
-    let resp = await fetch(types.url + "/chat" , {
+    let resp = await fetch(types.url + "/chats" , {
         method : "GET",
         headers : {
             "Content-Type" : "application/json",

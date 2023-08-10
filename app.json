@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "react-native-login",
-    "slug": "react-native-login",
-    "version": "1.0.0",
+    "name": "Pakmaweshi",
+    "slug": "Pakmaweshi",
+    "version": "0.0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -21,7 +21,11 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.geniusprogrammer13.Pakmaweshi"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +37,11 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e0014c27-8ef3-4311-b63c-efc891047a0c"
+      }
+    }
   }
 }

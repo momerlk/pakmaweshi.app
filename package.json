@@ -1,7 +1,11 @@
 {
   "name": "pak-maweshi-app",
+  "description": "Pakmaweshi : a marketplace for farmers",
   "version": "0.0.0.1",
   "main": "node_modules/expo/AppEntry.js",
+  "android": {
+    "package": "com.acinc.pakmaweshi"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
