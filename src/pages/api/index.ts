@@ -17,6 +17,14 @@ export default {
             return e
         }
     },
+    getItem : async (key : string) : Promise<any> => {
+        let data = await AsyncStorage.getItem(key)
+        let parsed = await JSON.parse(data!)
+        return parsed
+    },
+    setItem : (key : string , data : any) => {
+        AsyncStorage.setItem(key , JSON.stringify(data))
+    },
     types : types,
     users : users,
     files : files, 

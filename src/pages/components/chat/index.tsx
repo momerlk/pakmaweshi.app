@@ -65,7 +65,7 @@ export function ChatScreen({route , navigation} : any){
   
   const chat: ChatData = route.params.chat
 
-  let ws : null | WebSocket = null
+  let ws : null | WebSocket = null  
 
 
   
@@ -74,13 +74,16 @@ export function ChatScreen({route , navigation} : any){
     setMessages(msgsToImsgs(chat.messages))
     if (renders === 0 || ws === null){
       api.getToken().then(token => {
-        ws = new WebSocket("ws://192.168.18.6:8080/direct" , undefined , {headers : {
+        ws = new WebSocket(api.types.ws_url + "/direct" , undefined , {headers : {
           Authorization : token,
         }})
 
-        ws.onopen = (e : any) => alert(`connected to websocket!`)
+        ws.onopen = (e : any) => console.log(`connected to websocket!`)
 
-        ws.onmessage = (e : any) => console.log(e)
+        ws.onmessage = (msg : any) => {
+          let parsed = JSON.parse(msg.data)
+          setMessages((previousMessages : any) => GiftedChat.append(previousMessages, [msgToImsg(parsed)]))
+        }
         ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
       })
       setRenders(1)
@@ -108,10 +111,12 @@ export function ChatScreen({route , navigation} : any){
         onSend={messages => onSend(messages)}
         user={{
           _id: 1,
+          avatar : chat.avatar,
+
         }}
         
       />
-      <View style={{borderBottomColor : "lightGray", borderBottomWidth: 0.5}}></View>
+      <View style={{borderBottomColor : "lightGray", borderBottomWidth: 0.1}}></View>
       </View>
   )
 }
@@ -181,7 +186,7 @@ export function ChatItem(props : ChatData){
             <Text style={{ fontSize : 18}}>
               {props.name}
             </Text>
-            <Text style={{color : "gray"}}>{props.messages[props.messages.length-1].content}</Text>
+            <Text style={{color : "gray"}}>{props.messages[0].content}</Text>
           </VStack>
           <Text style={{paddingTop: 16 , paddingRight : 10 , color : "gray"}}>{props.messages[props.messages.length-1].time_sent}</Text>
       </HStack>
@@ -200,20 +205,54 @@ export default function () {
   const [clicked , setClicked] = useState(false)
   const [renders  , setRenders] = useState(0)
 
+  let ws : null | WebSocket = null  
+
   useEffect(() => {
     if(renders === 0){
     api.getToken().then(token => {
-      console.log(`token = ${token}`)
+
+
+      ws = new WebSocket(api.types.ws_url + "/direct" , undefined , {headers : {
+          Authorization : token,
+        }})
+
+      ws.onopen = (e : any) => console.log(`connected to websocket!`)
+
+      ws.onmessage = (msg : any) => {
+        
+        api.chats.GetChats(token).then(res => {
+          if (res.status !== 200){
+            alert(`failed to load chats , refresh to retry`)
+          } else {
+            console.log(res.chats)
+            for(let i = 0;i < res.chats.length;i++){
+              res.chats[i].messages = res.chats[i].messages.reverse()
+            }
+            setData(res.chats)
+          }
+        })
+
+      }
+
+      ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
+
+
+
       api.chats.GetChats(token).then(res => {
         if (res.status !== 200){
           alert(`failed to load chats , refresh to retry`)
         } else {
           console.log(res.chats)
+          for(let i = 0;i < res.chats.length;i++){
+            res.chats[i].messages = res.chats[i].messages.reverse()
+          }
           setData(res.chats)
         }
         
-        setRenders(1)
+        setRenders(renders+1)
       })
+
+
     })
   }
   })
