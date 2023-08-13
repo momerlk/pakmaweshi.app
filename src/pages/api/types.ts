@@ -1,5 +1,5 @@
-export const url = "http://172.20.10.7:8080"
-export const ws_url = "ws://172.20.10.7:8080"
+export const url = "http://192.168.18.6:8080"
+export const ws_url = "ws://192.168.18.6:8080"
 
 export interface Account {
     username : string,

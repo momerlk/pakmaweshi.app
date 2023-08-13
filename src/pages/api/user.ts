@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as types from "./types"
 
 export async function signIn(data : types.SignInBody) : Promise<{status : number , token : string}> {
@@ -14,11 +15,24 @@ export async function signIn(data : types.SignInBody) : Promise<{status : number
     })
     if (resp.status === 200) {
         let res = await resp.json()
+
+        let user_details = res
+
+        AsyncStorage.setItem("avatar" , user_details.avatar);
+        AsyncStorage.setItem("name" , user_details.name)
+        AsyncStorage.setItem("username" , user_details.username)
+        AsyncStorage.setItem("number" , user_details.number)
+        AsyncStorage.setItem("email" , user_details.email)
+
+        alert(`signin reponse = ${JSON.stringify(res)}`)
+        
         return {
             status : 200,
             token : res.token
         }
     }
+
+    
 
     return {
         status : resp.status,

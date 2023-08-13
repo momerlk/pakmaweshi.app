@@ -18,7 +18,6 @@ import { HStack , VStack } from "../components/util";
 
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
 
 import api from "../api"
 
@@ -40,7 +39,7 @@ export function SignUp() {
 
 
   const getPermissionAsync = async () => {
-    if (Constants.platform?.ios) {
+    if (true) {
       const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');

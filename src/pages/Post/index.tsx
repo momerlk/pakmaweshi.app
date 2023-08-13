@@ -25,7 +25,9 @@ import api from "../api"
 import * as Location from 'expo-location';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
+import * as Device from 'expo-device';
+
+
 
 
 const Tab = createBottomTabNavigator()
@@ -82,7 +84,7 @@ export default function () {
   }, []);
 
   const getPermissionAsync = async () => {
-    if (Constants.platform?.ios) {
+    if (true) {
       const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
       if (status !== 'granted') {
         alert('Sorry, we need camera roll permissions to make this work!');
