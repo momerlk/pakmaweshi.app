@@ -64,13 +64,34 @@ export function ChatScreen({route , navigation} : any){
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [renders , setRenders] = useState(0)
   
-  const chat: ChatData = route.params.chat
+  let chat: ChatData = route.params.chat
 
   let ws : null | WebSocket = null  
 
   
 
   useEffect(() => {
+    console.log("chat = ", chat)
+    if (chat.messages.length === 0){
+      AsyncStorage.getItem("token").then(token => {
+        api.chats.GetChats(token!).then(res => {
+          if (res.status !== 200){
+            alert(`failed to load chats , refresh to retry`)
+          } else {
+            console.log(res.chats)
+            for(let i = 0;i < res.chats.length;i++){
+              if (res.chats[i].username === chat.username) {
+                chat = res.chats[i];
+              }
+            }
+
+          }
+          setMessages(msgsToImsgs(chat.messages))
+          setRenders(renders+1)
+        })
+      })
+    }
+
     setMessages(msgsToImsgs(chat.messages))
     if (renders === 0 || ws === null){
       api.getToken().then(token => {
@@ -122,8 +143,12 @@ export function ChatScreen({route , navigation} : any){
         }))
 
         AsyncStorage.setItem("chat_refresh" , "true")
+        
         console.log(route.params.rerender)
-        route.params.rerender();
+        if (route.params.rerender !== undefined) {
+          route.params.rerender();
+        }
+        
       }
     })
     setMessages((previousMessages : any) => GiftedChat.append(previousMessages, messages))
@@ -246,7 +271,7 @@ export default function () {
         ws.onopen = (e : any) => console.log(`connected to websocket!`)
 
         ws.onmessage = (msg : any) => {
-          
+          alert("received new message")
           api.chats.GetChats(token!).then(res => {
           if (res.status !== 200){
             alert(`failed to load chats , refresh to retry`)
@@ -278,6 +303,7 @@ export default function () {
               res.chats[i].messages = res.chats[i].messages.reverse()
             }
             setData(res.chats)
+            console.log(data.length)
           }
           
           setRenders(renders+1)
@@ -286,6 +312,22 @@ export default function () {
 
       })
     }
+
+    AsyncStorage.getItem("chat_refresh").then(async refresh => {
+      let token = await AsyncStorage.getItem("token")
+      api.chats.GetChats(token!).then(res => {
+          if (res.status !== 200){
+            alert(`failed to load chats , refresh to retry`)
+          } else {
+            console.log(res.chats)
+            for(let i = 0;i < res.chats.length;i++){
+              res.chats[i].messages = res.chats[i].messages.reverse()
+            }
+            setData(res.chats)
+            console.log(data.length)
+          }
+        })
+    })
 
 
   })
@@ -297,6 +339,10 @@ export default function () {
   return (
     <View style={{...styles.container}} >
       <View style={{paddingVertical : 50 , backgroundColor : "white"}}></View>
+      {data.length === 0 ? 
+      <Text style={{margin: 40, fontSize : 17}}>
+        No Messages/Chats At the Moment Contact a Seller from Home
+        </Text> : null}
       <ScrollView style={{...styles.container , backgroundColor : "white"}}>
         {data.map(v => <ChatItem {...v} socket={ws!} rerender={() => {
           AsyncStorage.getItem("token").then(token => {
