@@ -38,3 +38,24 @@ export async function GetFeed(token : string) : Promise<{status : number , posts
         posts : []
     }
 }
+
+export async function GetDash(token : string) : Promise<{status : number , posts : types.Post[]}> {
+    let resp = await fetch(types.url + "/dash" , {
+        method : "GET",
+        headers : {
+            "Content-Type" : "application/json",
+            "Authorization" : token,
+        }
+    })
+    if (resp.status === 200){
+        const posts = await resp.json()
+        return {
+            status : resp.status,
+            posts : posts
+        }
+    }
+    return {
+        status : resp.status , 
+        posts : []
+    }
+}

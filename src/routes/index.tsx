@@ -79,14 +79,14 @@ export function Routes() {
               height: 60,
               marginTop : 23,
               borderBottomColor : "gray",
-              borderBottomWidth : 0.5,
+              borderBottomWidth : 0.1,
             }}>
               <TouchableOpacity
               style={{ padding: 10 , marginTop : 6}}
               onPress={() => {
                 navigation.goBack()
               }}>
-              <Text style={{fontSize : 30}}>{"<"}</Text>
+              <Text style={{fontSize : 30 , color : '#2E67F8'}}>{"<"}</Text>
             </TouchableOpacity>
             <HStack style={{marginTop : 20, paddingLeft : 6}}>
               

@@ -154,7 +154,12 @@ export function Post(props : PostData){
           <Text style={{alignSelf : "flex-end" , fontSize : 19 , fontWeight : "500" , color : "gray"}}>Rs </Text>
           <Text style={{alignSelf : "flex-end" , fontSize : 19 , paddingHorizontal : 2 , fontWeight : "400"}}>{props.price}</Text>
         </HStack>
-        <Button onPress={() => {
+        <Button onPress={async () => {
+          let username = await AsyncStorage.getItem("username")
+          if (username! === props.username){
+            alert(`cannot contact yourself!`)
+            return
+          }
           navigation.navigate("Message" , {
             chat : {
               name : "",

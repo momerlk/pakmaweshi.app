@@ -29,8 +29,8 @@ export function SignIn() {
         <Text style={styles.message}>Sign In to your Pak Maweshi Account</Text>
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
-        <Text style={styles.title}>Email</Text>
-        <TextInput placeholder="Enter your email or username" style={styles.input} inputMode="email" 
+        <Text style={styles.title}>Number</Text>
+        <TextInput placeholder="Enter your number or email/username" style={styles.input} inputMode="email" 
         value={log} onChangeText={v => setLog(v)}/>
         <Text style={styles.title}>Password</Text>
         <TextInput placeholder="Enter your password" secureTextEntry={true} style={styles.input} onChangeText={v => setPassword(v)}/>

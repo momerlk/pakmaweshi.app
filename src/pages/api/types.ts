@@ -1,5 +1,11 @@
+/**
+ * BASICALLY CONTAINS ALL CONSTANTS AND GLOBAL LEVEL TYPE EXPORTS
+ */
+
 export const url = "http://192.168.18.6:8080"
 export const ws_url = "ws://192.168.18.6:8080"
+
+
 
 export interface Account {
     username : string,

@@ -24,7 +24,6 @@ export async function signIn(data : types.SignInBody) : Promise<{status : number
         AsyncStorage.setItem("number" , user_details.number)
         AsyncStorage.setItem("email" , user_details.email)
 
-        alert(`signin reponse = ${JSON.stringify(res)}`)
         
         return {
             status : 200,

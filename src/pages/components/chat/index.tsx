@@ -19,6 +19,7 @@ import {GiftedChat, IMessage} from "react-native-gifted-chat"
 
 import {SearchBar , HStack , VStack} from "../util"
 import api from "../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Tab = createBottomTabNavigator()
 
@@ -67,24 +68,45 @@ export function ChatScreen({route , navigation} : any){
 
   let ws : null | WebSocket = null  
 
-
   
 
   useEffect(() => {
     setMessages(msgsToImsgs(chat.messages))
     if (renders === 0 || ws === null){
       api.getToken().then(token => {
-        ws = new WebSocket(api.types.ws_url + "/direct" , undefined , {headers : {
-          Authorization : token,
-        }})
+        ws = route.params.socket
+        if (true){
+          
+          AsyncStorage.getItem("token").then(token => {
+            console.log(token)
+            ws = new WebSocket(api.types.ws_url + "/direct" , undefined , {headers : {
+                  "Authorization" : token,
+                }})
+              console.log("connected to websocket from chatscreen component")
+            }).then(() => {
+              if (ws !== null) {
+              ws.onopen = (e : any) => console.log(`connected to websocket!`)
 
-        ws.onopen = (e : any) => console.log(`connected to websocket!`)
+              ws.onmessage = (msg : any) => {
+                let parsed = JSON.parse(msg.data)
+                setMessages((previousMessages : any) => GiftedChat.append(previousMessages, [msgToImsg(parsed)]))
 
-        ws.onmessage = (msg : any) => {
-          let parsed = JSON.parse(msg.data)
-          setMessages((previousMessages : any) => GiftedChat.append(previousMessages, [msgToImsg(parsed)]))
+                route.params.rerender(); 
+              }
+              ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
+
+              ws.onclose = (e : any) => alert(`websocket connection is closed!`)
+
+              console.log("set ws functions in chatscreen component")
+            } else {
+              console.log("ws === null")
+            }
+            })
+
+            
         }
-        ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
+
+        
       })
       setRenders(1)
     }
@@ -98,6 +120,10 @@ export function ChatScreen({route , navigation} : any){
           "content" : v.text,
           "attachment" : "",
         }))
+
+        AsyncStorage.setItem("chat_refresh" , "true")
+        console.log(route.params.rerender)
+        route.params.rerender();
       }
     })
     setMessages((previousMessages : any) => GiftedChat.append(previousMessages, messages))
@@ -168,17 +194,16 @@ const mock : ChatData[] = [
   },
 ]
 
-export interface ChatItemProps {
-  name : string;
-  avatar : string;
-}
-export function ChatItem(props : ChatData){
+
+export function ChatItem(props : any){
   const navigation = useNavigation<StackTypes>();
 
   return (
     <View style={{paddingTop : 7}}>
       <TouchableOpacity onPress={() => navigation.navigate("Message" , {
         chat : props,
+        socket : props.socket,
+        rerender : props.rerender,
       })}>
         <HStack style={{paddingBottom : 12 , paddingLeft : 6}}>
         <Image source={{uri : props.avatar}} style={{height : 65 , width : 65 , borderRadius : 50}}/>
@@ -207,20 +232,22 @@ export default function () {
 
   let ws : null | WebSocket = null  
 
+
   useEffect(() => {
     if(renders === 0){
-    api.getToken().then(token => {
+      
+      AsyncStorage.getItem("token").then(token => {
 
 
-      ws = new WebSocket(api.types.ws_url + "/direct" , undefined , {headers : {
-          Authorization : token,
-        }})
+        ws = new WebSocket(api.types.ws_url + "/direct" , undefined , {headers : {
+            "Authorization" : token!,
+          }})
 
-      ws.onopen = (e : any) => console.log(`connected to websocket!`)
+        ws.onopen = (e : any) => console.log(`connected to websocket!`)
 
-      ws.onmessage = (msg : any) => {
-        
-        api.chats.GetChats(token).then(res => {
+        ws.onmessage = (msg : any) => {
+          
+          api.chats.GetChats(token!).then(res => {
           if (res.status !== 200){
             alert(`failed to load chats , refresh to retry`)
           } else {
@@ -230,38 +257,66 @@ export default function () {
             }
             setData(res.chats)
           }
+          
+          setRenders(renders+1)
         })
 
-      }
-
-      ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
-
-
-
-      api.chats.GetChats(token).then(res => {
-        if (res.status !== 200){
-          alert(`failed to load chats , refresh to retry`)
-        } else {
-          console.log(res.chats)
-          for(let i = 0;i < res.chats.length;i++){
-            res.chats[i].messages = res.chats[i].messages.reverse()
-          }
-          setData(res.chats)
         }
-        
-        setRenders(renders+1)
+
+        ws.onclose = (e : any) => alert(`websocket connection is closed!`)
+
+        ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
+
+
+
+        api.chats.GetChats(token!).then(res => {
+          if (res.status !== 200){
+            alert(`failed to load chats , refresh to retry`)
+          } else {
+            console.log(res.chats)
+            for(let i = 0;i < res.chats.length;i++){
+              res.chats[i].messages = res.chats[i].messages.reverse()
+            }
+            setData(res.chats)
+          }
+          
+          setRenders(renders+1)
+        })
+
+
       })
+    }
 
 
-    })
-  }
   })
+
+  
+
+  
 
   return (
     <View style={{...styles.container}} >
-      <SearchBar clicked={clicked} setClicked={setClicked} placeholder={"Search Messages"}/>
+      <View style={{paddingVertical : 50 , backgroundColor : "white"}}></View>
       <ScrollView style={{...styles.container , backgroundColor : "white"}}>
-        {data.map(v => <ChatItem {...v}></ChatItem>)}
+        {data.map(v => <ChatItem {...v} socket={ws!} rerender={() => {
+          AsyncStorage.getItem("token").then(token => {
+
+              api.chats.GetChats(token!).then(res => {
+                if (res.status !== 200){
+                  alert(`failed to load chats , refresh to retry`)
+                } else {
+                  console.log(res.chats)
+                  for(let i = 0;i < res.chats.length;i++){
+                    res.chats[i].messages = res.chats[i].messages.reverse()
+                  }
+                  setData(res.chats)
+                }
+                
+              })
+
+
+            })
+        }}></ChatItem>)}
       </ScrollView>
     </View>
   );
