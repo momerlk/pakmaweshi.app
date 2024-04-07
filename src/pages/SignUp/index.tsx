@@ -16,6 +16,19 @@ import { StackTypes } from "../../routes";
 import { useNavigation } from "@react-navigation/native";
 import { HStack , VStack } from "../components/util";
 
+import RadioButtonRN from 'radio-buttons-react-native';
+const data = [
+{
+  label: 'a student'
+ },
+ {
+  label: 'a parent'
+ },
+ {
+  label: 'a teacher'
+ }
+];
+
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
@@ -37,57 +50,10 @@ export function SignUp() {
   const [number , setNumber] = useState("")
   const [name , setName] = useState("")
 
+  const [student , setStudent] = useState(true);
+  const [parent , setParent] = useState(true);
+  const [teacher , setTeacher] = useState(true);
 
-  const getPermissionAsync = async () => {
-    if (true) {
-      const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
-      } else {
-        setPerm(true)
-      }
-      return true
-    }
-  }
-
-  (async () => {
-    if (!perm){
-      await getPermissionAsync()
-    }
-  })()
-
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing : true,
-      aspect: [1,1],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri)
-
-      let toUpload = []
-      toUpload.push(result.assets[0].uri)
-
-
-      let resp = await api.files.UploadFile("token" , toUpload)
-      if (resp.status === 200){
-
-        const id = resp.ids[0]
-        let uri = api.files.FileidToUrl(id)
-
-        console.log(`uri = ${uri}`)
-        
-        setAvatar(uri)
-
-      } else {
-        alert(`failed to upload file with status code = ${resp.status}`)
-      }
-
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -95,17 +61,7 @@ export function SignUp() {
         <Text style={styles.message}>Create an account!</Text>
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={{...styles.containerForm , flex : 1}}>
-        <ScrollView>
-
-        <Text style={{textAlign : "center" , fontSize : 20, fontWeight : "bold" , paddingVertical : 20}}>Profile Picture</Text>
-        {image ? 
-        <Image source={{uri : image}} 
-        style={{width : 140 , height : 140  , marginLeft : "30%" , marginTop : 20 , borderRadius : 100}}/>:  
-        <Text style={{textAlign : "center" , fontSize : 15, paddingBottom : 10}}>Image will appear here</Text>}
-
-        <Button title="Pick an image from camera roll" onPress={pickImage} />
-
-
+        <ScrollView>        
 
         <Text style={styles.title}>Full Name</Text>
         <TextInput placeholder="Enter your full name" style={styles.input} value={name} onChangeText={v => setName(v)}/>
@@ -117,8 +73,26 @@ export function SignUp() {
         value={number} onChangeText={v => setNumber(v.toString())}/>
         </HStack>
 
-        <Text style={styles.title}>Username</Text>
-        <TextInput placeholder="Enter your user name" style={styles.input} value={username} onChangeText={v => setUsername(v)}/>
+        <Text style={styles.title}>Who are you ?</Text>
+          <RadioButtonRN
+            initial={1}
+            data={data}
+            selectedBtn={(e: any) => {
+              setStudent(false);
+              setParent(false);
+              setTeacher(false);
+              
+              if (e.label === data[0].label) {
+                setStudent(true);
+              }
+              if (e.label === data[1].label) {
+                setParent(true);
+              }
+              if (e.label === data[2].label) {
+                setTeacher(true);
+              } 
+            }}
+          />
 
         <Text style={styles.title}>Email</Text>
         <TextInput placeholder="Enter your email" style={styles.input} 

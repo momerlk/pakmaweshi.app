@@ -26,7 +26,7 @@ export function SignIn() {
   return (
     <View style={styles.container}>
       <Animatable.View animation="fadeInLeft" delay={500} style={styles.header}>
-        <Text style={styles.message}>Sign In to your Pak Maweshi Account</Text>
+        <Text style={styles.message}>Sign In to your Account</Text>
       </Animatable.View>
       <Animatable.View animation="fadeInUp" style={styles.containerForm}>
         <Text style={styles.title}>Number</Text>
