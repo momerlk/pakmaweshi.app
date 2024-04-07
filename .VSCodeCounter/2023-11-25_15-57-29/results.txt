@@ -1,0 +1,78 @@
+Date : 2023-11-25 15:57:29
+Directory : c:\Users\orgam\Documents\work\projects\pakmaweshi\app
+Total : 33 files,  39992 codes, 42 comments, 334 blanks, all 40368 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          4 |     37,969 |         33 |          2 |     38,004 |
+| TypeScript JSX     |         11 |      1,354 |          6 |        258 |      1,618 |
+| TypeScript         |         15 |        642 |          3 |         63 |        708 |
+| Markdown           |          1 |         15 |          0 |          9 |         24 |
+| JSON with Comments |          1 |          6 |          0 |          1 |          7 |
+| JavaScript         |          1 |          6 |          0 |          1 |          7 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                           | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                              |         33 |     39,992 |         42 |        334 |     40,368 |
+| . (Files)                                                                                      |          8 |     38,007 |         33 |         15 |     38,055 |
+| src                                                                                            |         25 |      1,985 |          9 |        319 |      2,313 |
+| src\pages                                                                                      |         23 |      1,883 |          9 |        306 |      2,198 |
+| src\pages\Home                                                                                 |          2 |        420 |          2 |         49 |        471 |
+| src\pages\Post                                                                                 |          2 |        214 |          2 |         45 |        261 |
+| src\pages\SignIn                                                                               |          2 |        121 |          0 |         12 |        133 |
+| src\pages\SignUp                                                                               |          2 |        194 |          2 |         38 |        234 |
+| src\pages\Welcome                                                                              |          2 |        102 |          0 |          8 |        110 |
+| src\pages\api                                                                                  |          6 |        233 |          3 |         47 |        283 |
+| src\pages\components                                                                           |          7 |        599 |          0 |        107 |        706 |
+| src\pages\components (Files)                                                                   |          1 |         80 |          0 |         10 |         90 |
+| src\pages\components\chat                                                                      |          2 |        320 |          0 |         72 |        392 |
+| src\pages\components\dashboard                                                                 |          2 |         81 |          0 |          8 |         89 |
+| src\pages\components\settings                                                                  |          2 |        118 |          0 |         17 |        135 |
+| src\routes                                                                                     |          1 |         95 |          0 |         12 |        107 |
+| src\utils                                                                                      |          1 |          7 |          0 |          1 |          8 |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                       | language           | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\App.tsx                                  | TypeScript JSX     |         11 |          0 |          2 |         13 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\README.md                                | Markdown           |         15 |          0 |          9 |         24 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\app.json                                 | JSON               |         15 |         33 |          0 |         48 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\babel.config.js                          | JavaScript         |          6 |          0 |          1 |          7 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\eas.json                                 | JSON               |         18 |          0 |          0 |         18 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package-lock.json                        | JSON               |     37,878 |          0 |          1 |     37,879 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package.json                             | JSON               |         58 |          0 |          1 |         59 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Home\index.tsx                 | TypeScript JSX     |        365 |          2 |         47 |        414 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Home\styles.ts                 | TypeScript         |         55 |          0 |          2 |         57 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Post\index.tsx                 | TypeScript JSX     |        201 |          2 |         43 |        246 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Post\styles.ts                 | TypeScript         |         13 |          0 |          2 |         15 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignIn\index.tsx               | TypeScript JSX     |         65 |          0 |         10 |         75 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignIn\styles.ts               | TypeScript         |         56 |          0 |          2 |         58 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignUp\index.tsx               | TypeScript JSX     |        138 |          2 |         36 |        176 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignUp\styles.ts               | TypeScript         |         56 |          0 |          2 |         58 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Welcome\index.tsx              | TypeScript JSX     |         45 |          0 |          7 |         52 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Welcome\styles.ts              | TypeScript         |         57 |          0 |          1 |         58 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\chats.ts                   | TypeScript         |         21 |          0 |          2 |         23 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\files.ts                   | TypeScript         |         46 |          0 |         14 |         60 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\index.ts                   | TypeScript         |         31 |          0 |          2 |         33 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\posts.ts                   | TypeScript         |         56 |          0 |          5 |         61 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\types.ts                   | TypeScript         |         37 |          3 |          8 |         48 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\user.ts                    | TypeScript         |         42 |          0 |         16 |         58 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\chat\index.tsx      | TypeScript JSX     |        265 |          0 |         70 |        335 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\chat\styles.ts      | TypeScript         |         55 |          0 |          2 |         57 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\dashboard\index.tsx | TypeScript JSX     |         26 |          0 |          6 |         32 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\dashboard\styles.ts | TypeScript         |         55 |          0 |          2 |         57 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\settings\index.tsx  | TypeScript JSX     |         63 |          0 |         15 |         78 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\settings\styles.ts  | TypeScript         |         55 |          0 |          2 |         57 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\util.tsx            | TypeScript JSX     |         80 |          0 |         10 |         90 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\routes\index.tsx                     | TypeScript JSX     |         95 |          0 |         12 |        107 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\utils\phoneNumberMask.ts             | TypeScript         |          7 |          0 |          1 |          8 |
+| c:\Users\orgam\Documents\work\projects\pakmaweshi\app\tsconfig.json                            | JSON with Comments |          6 |          0 |          1 |          7 |
+| Total                                                                                          |                    |     39,992 |         42 |        334 |     40,368 |
++------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

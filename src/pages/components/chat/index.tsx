@@ -71,14 +71,12 @@ export function ChatScreen({route , navigation} : any){
   
 
   useEffect(() => {
-    console.log("chat = ", chat)
     if (chat.messages.length === 0){
       AsyncStorage.getItem("token").then(token => {
         api.chats.GetChats(token!).then(res => {
           if (res.status !== 200){
             alert(`failed to load chats , refresh to retry`)
           } else {
-            console.log(res.chats)
             for(let i = 0;i < res.chats.length;i++){
               if (res.chats[i].username === chat.username) {
                 chat = res.chats[i];
@@ -99,7 +97,6 @@ export function ChatScreen({route , navigation} : any){
         if (true){
           
           AsyncStorage.getItem("token").then(token => {
-            console.log(token)
             ws = new WebSocket(api.types.ws_url + "/direct" , undefined , {headers : {
                   "Authorization" : token,
                 }})
@@ -144,7 +141,6 @@ export function ChatScreen({route , navigation} : any){
 
         AsyncStorage.setItem("chat_refresh" , "true")
         
-        console.log(route.params.rerender)
         if (route.params.rerender !== undefined) {
           route.params.rerender();
         }
@@ -174,42 +170,10 @@ export function ChatScreen({route , navigation} : any){
 
 const mock : ChatData[] = [
   {
-    "name" : "Omer Ali Malik",
-    "username" : "momer",
+    "name" : "No One",
+    "username" : "user",
     "avatar" : "https://neural.love/cdn/ai-photostock/1ed9b768-7341-6682-b3be-47a7bb8aa7aa/0.jpg?Expires=1693526399&Signature=LZRtaKIz8Li-1hNYLclU5eaBBE-1AJm08vGdFv4umku7-q3ILujYZRa-8Gyb38S99QeqMBh~TObpD0~LjbJqx4InCxi05~NHA7i3PRHI7Z57JPs6llkzRCQvgyf-SHgp6I4nJuH66EWavU8EQ8dVkzN6ao7b9LMneYS3Q5S3xLMc7S2kectSgsQ5KZmpeLDE17o7rUvwcn1WwvXh4UBLRk44zYX~ofZupPyfDl1Ny13qDeJmQQNpjkIBkE4YfUfiBYypVxCmYMkEd8ykwQCnHsmotARAq7Wy6qfeTbEAsvhpLxwex1zIDvY4QewZIJE7pip6d8Kc4RFWdSdl0o6YVA__&Key-Pair-Id=K2RFTOXRBNSROX",
     "messages" : [
-      {
-        "content" : "test",
-        "sent" : false,
-        "time_sent" : "11:58 a.m",
-      },
-      {
-        "content" : "test",
-        "sent" : false,
-        "time_sent" : "11:58 a.m",
-      },
-      {
-        "content" : "hello!",
-        "sent" : true,
-        "time_sent" : "11:58 a.m",
-      },
-    ],
-  },
-  {
-    "name" : "Omer Ali Malik",
-    "username" : "momer",
-    "avatar" : "https://neural.love/cdn/ai-photostock/1ed9b768-7341-6682-b3be-47a7bb8aa7aa/0.jpg?Expires=1693526399&Signature=LZRtaKIz8Li-1hNYLclU5eaBBE-1AJm08vGdFv4umku7-q3ILujYZRa-8Gyb38S99QeqMBh~TObpD0~LjbJqx4InCxi05~NHA7i3PRHI7Z57JPs6llkzRCQvgyf-SHgp6I4nJuH66EWavU8EQ8dVkzN6ao7b9LMneYS3Q5S3xLMc7S2kectSgsQ5KZmpeLDE17o7rUvwcn1WwvXh4UBLRk44zYX~ofZupPyfDl1Ny13qDeJmQQNpjkIBkE4YfUfiBYypVxCmYMkEd8ykwQCnHsmotARAq7Wy6qfeTbEAsvhpLxwex1zIDvY4QewZIJE7pip6d8Kc4RFWdSdl0o6YVA__&Key-Pair-Id=K2RFTOXRBNSROX",
-    "messages" : [
-      {
-        "content" : "test",
-        "sent" : false,
-        "time_sent" : "11:58 a.m",
-      },
-      {
-        "content" : "test",
-        "sent" : false,
-        "time_sent" : "11:58 a.m",
-      },
       {
         "content" : "hello!",
         "sent" : true,
@@ -276,11 +240,11 @@ export default function () {
           if (res.status !== 200){
             alert(`failed to load chats , refresh to retry`)
           } else {
-            console.log(res.chats)
             for(let i = 0;i < res.chats.length;i++){
               res.chats[i].messages = res.chats[i].messages.reverse()
             }
             setData(res.chats)
+            console.log("received new message so refreshed chats!")
           }
           
           setRenders(renders+1)
@@ -292,18 +256,17 @@ export default function () {
 
         ws.onerror = (e : any) => alert(`failed to connect to server, restart app`)
 
-
-
+         
+ 
         api.chats.GetChats(token!).then(res => {
           if (res.status !== 200){
             alert(`failed to load chats , refresh to retry`)
           } else {
-            console.log(res.chats)
             for(let i = 0;i < res.chats.length;i++){
               res.chats[i].messages = res.chats[i].messages.reverse()
             }
             setData(res.chats)
-            console.log(data.length)
+            console.log("received chat list data")
           }
           
           setRenders(renders+1)
@@ -314,19 +277,21 @@ export default function () {
     }
 
     AsyncStorage.getItem("chat_refresh").then(async refresh => {
-      let token = await AsyncStorage.getItem("token")
-      api.chats.GetChats(token!).then(res => {
-          if (res.status !== 200){
-            alert(`failed to load chats , refresh to retry`)
-          } else {
-            console.log(res.chats)
-            for(let i = 0;i < res.chats.length;i++){
-              res.chats[i].messages = res.chats[i].messages.reverse()
+      if (refresh === "true") {
+        let token = await AsyncStorage.getItem("token")
+        api.chats.GetChats(token!).then(res => {
+            if (res.status !== 200){
+              alert(`failed to load chats , refresh to retry`)
+            } else {
+              for(let i = 0;i < res.chats.length;i++){
+                res.chats[i].messages = res.chats[i].messages.reverse()
+              }
+              setData(res.chats)
+              console.log("refreshed chat list!")
+              AsyncStorage.setItem("chat_refresh" , "false")
             }
-            setData(res.chats)
-            console.log(data.length)
-          }
         })
+      }
     })
 
 
@@ -351,7 +316,6 @@ export default function () {
                 if (res.status !== 200){
                   alert(`failed to load chats , refresh to retry`)
                 } else {
-                  console.log(res.chats)
                   for(let i = 0;i < res.chats.length;i++){
                     res.chats[i].messages = res.chats[i].messages.reverse()
                   }

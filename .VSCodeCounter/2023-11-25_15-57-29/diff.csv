@@ -1,0 +1,16 @@
+"filename", "language", "JSON", "TypeScript JSX", "TypeScript", "comment", "blank", "total"
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\app.json", "JSON", 0, 0, 0, 9, 0, 9
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\eas.json", "JSON", 18, 0, 0, 0, 0, 18
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package-lock.json", "JSON", 648, 0, 0, 0, 0, 648
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\package.json", "JSON", 5, 0, 0, 0, 0, 5
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Home\index.tsx", "TypeScript JSX", 0, 15, 0, 0, 0, 15
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\Post\index.tsx", "TypeScript JSX", 0, 0, 0, 0, 2, 2
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\SignUp\index.tsx", "TypeScript JSX", 0, -1, 0, 0, 0, -1
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\index.ts", "TypeScript", 0, 0, 8, 0, 0, 8
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\posts.ts", "TypeScript", 0, 0, 20, 0, 1, 21
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\types.ts", "TypeScript", 0, 0, 1, 3, 3, 7
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\api\user.ts", "TypeScript", 0, 0, 7, 0, 7, 14
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\chat\index.tsx", "TypeScript JSX", 0, 108, 0, 0, 50, 158
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\pages\components\settings\index.tsx", "TypeScript JSX", 0, 37, 0, 0, 9, 46
+"c:\Users\orgam\Documents\work\projects\pakmaweshi\app\src\routes\index.tsx", "TypeScript JSX", 0, 34, 0, 0, 3, 37
+"Total", "-", 671, 193, 36, 12, 75, 987
